@@ -5,10 +5,10 @@
   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"><br>
 
   <label for="date-played">Date Played</label>
-  <input id="date-played" type="date" name="game[date]" value=""><br>
+  <input id="date-played" type="date" name="game[date_played]" value=""><br>
 
   <label for="select-opponent">Select Opponent</label>
-  <%= collection_select :game, :user_id, User.where.not(id: current_user.id), :id, :email, include_blank: false, id: "select-opponent" %><br>
+  <%= collection_select :game, :player_two_id, User.where.not(id: current_user.id), :id, :email, include_blank: false, id: "select-opponent" %><br>
 
   <label for="your-score">Your Score</label>
   <input id="your-score" type="text" name="game[player_one_score]" value="" placeholder="21"><br>
