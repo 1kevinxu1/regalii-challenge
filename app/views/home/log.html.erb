@@ -1,5 +1,20 @@
 <h1 class='page-header'>Log Game</h1>
 
-<div class="alert alert-warning" role="alert">This is a sample page. Replace link in the header with your own.</div>
 
-<%= image_tag('log_game.png') %>
+<form id="submit-score-form" action="" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"><br>
+
+  <label for="date-played">Date Played</label>
+  <input id="date-played" type="date" name="game[date]" value=""><br>
+
+  <label for="select-opponent">Select Opponent</label>
+  <%= collection_select :game, :user_id, User.where.not(id: current_user.id), :id, :email, include_blank: false, id: "select-opponent" %><br>
+
+  <label for="your-score">Your Score</label>
+  <input id="your-score" type="text" name="game[player_one_score]" value="" placeholder="21"><br>
+
+  <label for="their-score">Their Score</label>
+  <input id="their-score" type="text" name="game[player_two_score]" value="" placeholder="19"><br>
+
+  <button id="score-submit" class="btn" type="submit" name="name">Submit Game</button>
+</form>
