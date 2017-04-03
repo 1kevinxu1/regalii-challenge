@@ -12,7 +12,7 @@ class Game < ActiveRecord::Base
     player_two_result = 1 - player_one_result
 
     player_one_expectation = 1/(1+10**((player_two.elo - player_one.elo)/400.0))
-    player_one_expectation = 1/(1+10**((player_one.elo - player_two.elo)/400.0))
+    player_two_expectation = 1/(1+10**((player_one.elo - player_two.elo)/400.0))
 
     player_one.elo += (50*(player_one_result - player_one_expectation))
     player_two.elo += (50*(player_two_result - player_two_expectation))

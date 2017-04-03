@@ -1,5 +1,17 @@
 <h1 class='page-header'>Leaderboard</h1>
 
-<div class="alert alert-warning" role="alert">This is a sample page.</div>
+<table>
+<tr>
+  <th>Rank</th>
+  <th>Email</th>
+  <th>Elo</th>
+  <th>Games Played</th>
 
-<%= image_tag('leaderboard.png') %>
+<% User.all.order("elo DESC").each_with_index do |user, index| %>
+  <tr>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%= index + 1 %></td>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%= user.email %></td>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%= user.elo %></td>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%= user.games.count %></td>
+  </tr>
+<% end %>
