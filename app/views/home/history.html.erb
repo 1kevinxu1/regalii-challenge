@@ -2,13 +2,13 @@
 
 <table>
 <tr>
-  <th>Timestamp</th>
+  <th>Date Played</th>
   <th>Opponent User</th>
   <th>Game Score</th>
 
 <% current_user.games.each do |game| %>
   <tr>
-    <td style="overflow: auto; height: 60px; width: 400px;"><%=game.created_at %></td>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%=game.date_played.to_date %></td>
     <td style="overflow: auto; height: 60px; width: 400px;"><%=current_user.opponent(game).email %></td>
     <td style="overflow: auto; height: 60px; width: 400px;"><%=current_user.game_score(game) %></td>
   </tr>
