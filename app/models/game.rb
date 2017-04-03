@@ -41,9 +41,9 @@ class Game < ActiveRecord::Base
     if player_one_score < 21 && player_two_score < 21
       errors.add(:winning_score, "must be at least 21")
     end
-    if player_one_score > 19 && (player_two_score != player_one_score + 2 &&
-                                 player_two_score != player_one_score - 2)
-      errors.add(:games, "must be played to 21")
+    if (player_one_score > 19 && player_two_score > 19) &&
+      (player_two_score != player_one_score + 2 && player_two_score != player_one_score - 2)
+      errors.add(:games, "must be played to 21 and only continue if not won by 2 points")
     end
   end
 end
