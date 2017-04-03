@@ -2,6 +2,7 @@ class GameController < ApplicationController
   def create
     @game = Game.new(game_params.merge(player_one_id: current_user.id))
     if @game.save
+      @game.calculate_new_ratings
       redirect_to log_url
       flash[:notice] = "Game successfully logged"
     else

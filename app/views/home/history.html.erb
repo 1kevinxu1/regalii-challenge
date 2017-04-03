@@ -1,5 +1,15 @@
 <h1 class='page-header'>History</h1>
 
-<div class="alert alert-warning" role="alert">This is a sample page. Replace link in the header with your own.</div>
+<table>
+<tr>
+  <th>Timestamp</th>
+  <th>Opponent User</th>
+  <th>Game Score</th>
 
-<%= image_tag('history.png') %>
+<% current_user.games.each do |game| %>
+  <tr>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%=game.created_at %></td>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%=current_user.opponent(game).email %></td>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%=current_user.game_score(game) %></td>
+  </tr>
+<% end %>

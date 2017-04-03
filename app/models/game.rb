@@ -4,6 +4,23 @@ class Game < ActiveRecord::Base
   belongs_to :player_one, class_name: "User"
   belongs_to :player_two, class_name: "User"
 
+  def calculate_new_ratings
+    player_one_rating = player_one.elo
+    player_two_rating = player_two.elo
+
+    player_one_result = player_one_score > player_two_score ? 1 : 0
+    player_two_result = 1 - player_one_result
+
+    player_one_expectation = 1/(1+10**((player_two.elo - player_one.elo)/400.0))
+    player_one_expectation = 1/(1+10**((player_one.elo - player_two.elo)/400.0))
+
+    player_one.elo += (50*(player_one_result - player_one_expectation))
+    player_two.elo += (50*(player_two_result - player_two_expectation))
+
+    player_one.save && player_two.save
+    return player_one.elo, player_two.elo
+  end
+
   def date_played_cannot_be_in_the_future
     if date_played && date_played > Date.today
       errors.add(:date_played, "can't be in the future")
