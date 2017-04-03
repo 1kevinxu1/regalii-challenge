@@ -7,9 +7,9 @@
   <th>Elo</th>
   <th>Games Played</th>
 
-<% User.all.order("elo DESC").each_with_index do |user, index| %>
+<% User.get_all_by_rank.each do |user| %>
   <tr>
-    <td style="overflow: auto; height: 60px; width: 400px;"><%= index + 1 %></td>
+    <td style="overflow: auto; height: 60px; width: 400px;"><%= user.rank %></td>
     <td style="overflow: auto; height: 60px; width: 400px;"><%= user.email %></td>
     <td style="overflow: auto; height: 60px; width: 400px;"><%= user.elo %></td>
     <td style="overflow: auto; height: 60px; width: 400px;"><%= user.games.count %></td>
