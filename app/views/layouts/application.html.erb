@@ -14,15 +14,19 @@
 
   <%= render 'layouts/header' %>
 
-  <% if flash[:notice] %>
-    <p><%= flash[:notice] %></p>
-  <% end %>
-
-  <% if flash[:errors] %>
-    <p><%= flash[:errors].join(", ") %></p>
-  <% end %>
-  
   <div class='container'>
+    <% if flash[:notice] %>
+      <p class="alert alert-success alert-block"><%= flash[:notice] %></p>
+    <% end %>
+
+    <% if flash[:errors] %>
+      <div class="alert alert-danger alert-block">
+        <% flash[:errors].each do |error| %>
+          <li> <%=error%></li>
+        <% end %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </div>
 </body>
